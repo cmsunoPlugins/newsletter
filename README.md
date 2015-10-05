@@ -27,3 +27,5 @@ Great plugin to send a formated newsletter to a list of subscriber.
 Use PHP mail() or Gmail SMTP.
 Shortcode to add a subscribe form in the page.
 Link in the mail to unsubscribe.
+
+[CMSUno](https://github.com/boiteasite/cmsuno)
