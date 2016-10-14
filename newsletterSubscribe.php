@@ -21,7 +21,7 @@ if (isset($_GET['a'])&&isset($_GET['c'])&&isset($_GET['m'])&&isset($_GET['b']))
 				if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out))
 					{
 					echo "<script language='JavaScript'>setTimeout(function(){document.location.href='".strip_tags($_GET['b'])."';},2000);</script>";
-					echo "<html><head><meta charset='utf-8'></head><body><h3 style='text-align:center;margin-top:50px;'>"._('email added')."</h3></body></html>";
+					echo "<html><head><meta charset='utf-8'></head><body><h3 style='text-align:center;margin-top:50px;'>".T_('email added')."</h3></body></html>";
 					break;
 					}
 				}
@@ -47,7 +47,7 @@ if (isset($_GET['a'])&&isset($_GET['c'])&&isset($_GET['m'])&&isset($_GET['b']))
 				if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out))
 					{
 					echo "<script language='JavaScript'>setTimeout(function(){document.location.href='".strip_tags($_GET['b'])."';},2000);</script>";
-					echo "<html><head><meta charset='utf-8'></head><body><h3 style='text-align:center;margin-top:50px;'>"._('email deleted')."</h3></body></html>";
+					echo "<html><head><meta charset='utf-8'></head><body><h3 style='text-align:center;margin-top:50px;'>".T_('email deleted')."</h3></body></html>";
 					break;
 					}
 				}
@@ -68,12 +68,12 @@ if (isset($_GET['a'])&&isset($_GET['c'])&&isset($_GET['m'])&&isset($_GET['b']))
 			$r = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, substr($key,0,30), strip_tags($_GET['m']), MCRYPT_MODE_ECB, $iv));
 			$rn = "\r\n";
 			$ul = $a['url']."/uno/plugins/newsletter/newsletterSubscribe.php?c=".urlencode($r)."&m=".urlencode(strip_tags($_GET['m']))."&a=add&b=".urlencode($a['url'].'/'.$a['nom'].'.html');
-			$supp = "<div style='color:#999;font-size:11px;text-align:center;'><a href='".$ul."'>"._("Unsubscribe")."</a></div>";
+			$supp = "<div style='color:#999;font-size:11px;text-align:center;'><a href='".$ul."'>".T_("Unsubscribe")."</a></div>";
 			$boundary = "-----=".md5(rand());
-			$body = _("Confirm registration by clicking this link").": <a href='".$ul."'>".$ul."</a>";
+			$body = T_("Confirm registration by clicking this link").": <a href='".$ul."'>".$ul."</a>";
 			$msgT = strip_tags($body);
 			$msgH = $top . $body . $bottom;
-			$sujet = $a['tit'].' - '. _("Subscribe Newsletter");
+			$sujet = $a['tit'].' - '. T_("Subscribe Newsletter");
 			$fm = preg_replace("/[^a-zA-Z ]+/", "", $a['tit']);
 			$header  = "From: ".$fm."<".$c['mel'].">".$rn."Reply-To:".$fm."<".$c['mel'].">";
 			$header.= "MIME-Version: 1.0".$rn;
@@ -91,12 +91,12 @@ if (isset($_GET['a'])&&isset($_GET['c'])&&isset($_GET['m'])&&isset($_GET['b']))
 			if(mail(strip_tags($_GET['m']), stripslashes($sujet), stripslashes($msg),$header))
 				{
 				echo "<script language='JavaScript'>setTimeout(function(){document.location.href='".$a['url'].'/'.$a['nom'].'.html'."';},2000);</script>";
-				echo "<html><head><meta charset='utf-8'></head><body><h2 style='text-align:center;margin-top:50px;'>"._("You will receive an email to confirm")."...</h2></body></html>";
+				echo "<html><head><meta charset='utf-8'></head><body><h2 style='text-align:center;margin-top:50px;'>".T_("You will receive an email to confirm")."...</h2></body></html>";
 				}
 			else
 				{
 				echo "<script language='JavaScript'>setTimeout(function(){document.location.href='".$a['url'].'/'.$a['nom'].'.html'."';},2000);</script>";
-				echo "<html><head><meta charset='utf-8'></head><body><h2 style='text-align:center;margin-top:50px;'>"._("Error")."...</h2></body></html>";
+				echo "<html><head><meta charset='utf-8'></head><body><h2 style='text-align:center;margin-top:50px;'>".T_("Error")."...</h2></body></html>";
 				}
 			}
 		break;

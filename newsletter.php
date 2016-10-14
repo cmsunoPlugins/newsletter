@@ -15,77 +15,77 @@ if (isset($_POST['action']))
 		case 'plugin': ?>
 		<link rel="stylesheet" type="text/css" media="screen" href="uno/plugins/newsletter/newsletter.css" />
 		<div class="blocForm">
-			<div id="newsletterC" class="bouton fr" onClick="f_config_newsletter();" title="<?php echo _("Configure the plugin");?>"><?php echo _("Config");?></div>
-			<div id="newsletterL" class="bouton fr" onClick="f_list_newsletter();" title="<?php echo _("Edit your mailing list");?>"><?php echo _("Mailing List");?></div>
-			<div id="newsletterW" class="bouton fr current" onClick="f_write_newsletter();" title="<?php echo _("Write a newsletter");?>"><?php echo _("Write");?></div>
-			<h2><?php echo _("Newsletter");?></h2>
+			<div id="newsletterC" class="bouton fr" onClick="f_config_newsletter();" title="<?php echo T_("Configure the plugin");?>"><?php echo T_("Config");?></div>
+			<div id="newsletterL" class="bouton fr" onClick="f_list_newsletter();" title="<?php echo T_("Edit your mailing list");?>"><?php echo T_("Mailing List");?></div>
+			<div id="newsletterW" class="bouton fr current" onClick="f_write_newsletter();" title="<?php echo T_("Write a newsletter");?>"><?php echo T_("Write");?></div>
+			<h2><?php echo T_("Newsletter");?></h2>
 			<div id="newsletterWrite">
 				<div id="newsletterResult"></div>
 				<p>
-					<?php echo _("This plugin allows you to send a newsletter to an email list.")." ";?>
-					<?php echo _("It works with the mail() function of your server or in SMTP with your GMAIL account.");?>
+					<?php echo T_("This plugin allows you to send a newsletter to an email list.")." ";?>
+					<?php echo T_("It works with the mail() function of your server or in SMTP with your GMAIL account.");?>
 				</p>
 				<p>
-					<?php echo _("The shortcode");?>&nbsp;<code>[[newsletter]]</code>&nbsp;<?php echo _("add a field to enter his email address and receive the newsletter.")." ";?>
-					<?php echo _("The newsletter contains in footer an automatic unsubscribe link.");?>
+					<?php echo T_("The shortcode");?>&nbsp;<code>[[newsletter]]</code>&nbsp;<?php echo T_("add a field to enter his email address and receive the newsletter.")." ";?>
+					<?php echo T_("The newsletter contains in footer an automatic unsubscribe link.");?>
 				</p>
 				<div class="blocForm">
 					<div class="input" id="newsletterP">
-						<p><?php echo _("Subject");?></p>
+						<p><?php echo T_("Subject");?></p>
 						<input name="newsletterSu" id="newsletterSu" size="50" type="text" value="" />
-						<p><?php echo _("Content");?></p>
+						<p><?php echo T_("Content");?></p>
 						<textarea name="newsletterCont" id="newsletterCont"></textarea>
 					</div>
 				</div>
 				<div class="blocBouton">
-					<div class="bouton fr <?php if(!file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) echo 'danger'; ?>" onClick="f_save_newsletter();" title="<?php echo _("Saves the contents");?>"><?php echo _("Save");?></div>
-					<div class="bouton fr" onClick="f_send_newsletter(0,'<?php echo _("Sending");?>','<?php echo _("finished.");?>');" title="<?php echo _("Send only to test");?>"><?php echo _("Send to test");?></div>
-					<div class="bouton fr" onClick="f_send_newsletter(1,'<?php echo _("Sending");?>','<?php echo _("finished.");?>');" title="<?php echo _("Send the newsletter");?>"><?php echo _("Send");?></div>
+					<div class="bouton fr <?php if(!file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) echo 'danger'; ?>" onClick="f_save_newsletter();" title="<?php echo T_("Saves the contents");?>"><?php echo T_("Save");?></div>
+					<div class="bouton fr" onClick="f_send_newsletter(0,'<?php echo T_("Sending");?>','<?php echo T_("finished.");?>');" title="<?php echo T_("Send only to test");?>"><?php echo T_("Send to test");?></div>
+					<div class="bouton fr" onClick="f_send_newsletter(1,'<?php echo T_("Sending");?>','<?php echo T_("finished.");?>');" title="<?php echo T_("Send the newsletter");?>"><?php echo T_("Send");?></div>
 				</div>
 			</div>
 			<div id="newsletterList" style="display:none;">
 				<div>
-					<p><?php echo _("New recipient");?></p>
+					<p><?php echo T_("New recipient");?></p>
 					<input name="newsletterAdd" id="newsletterAdd" size="50" type="text" />
-					<div class="bouton fr" onClick="f_add_newsletter();" title="<?php echo _("Add a new recipient");?>"><?php echo _("Add");?></div>
+					<div class="bouton fr" onClick="f_add_newsletter();" title="<?php echo T_("Add a new recipient");?>"><?php echo T_("Add");?></div>
 					<div id="newsletterML"></div>
 				</div>
 			</div>
 			<div id="newsletterConfig" style="display:none;">
 				<table class="hForm">
 					<tr>
-						<td colspan=2 style="text-align:left;padding-left:30px;font-weight:700;"><?php echo _("Sending method");?> :</td>
+						<td colspan=2 style="text-align:left;padding-left:30px;font-weight:700;"><?php echo T_("Sending method");?> :</td>
 					</tr>
 					<tr>
-						<td><label><?php echo _("PHP");?></label></td>
+						<td><label><?php echo T_("PHP");?></label></td>
 						<td><input type="radio" name="newsletterMet" value="php" checked></td>
-						<td><em><?php echo _("Newsletter is sent by using the features of your server.");?></em></td>
+						<td><em><?php echo T_("Newsletter is sent by using the features of your server.");?></em></td>
 					</tr>
 					<tr>
-						<td><label><?php echo _("Gmail");?></label></td>
+						<td><label><?php echo T_("Gmail");?></label></td>
 						<td><input type="radio" name="newsletterMet" value="gm"></td>
-						<td><em><?php echo _("Newsletter is sent with your Gmail account.");?></em></td>
+						<td><em><?php echo T_("Newsletter is sent with your Gmail account.");?></em></td>
 					</tr>
 					<tr>
-						<td><label><?php echo _("Gmail account");?></label></td>
+						<td><label><?php echo T_("Gmail account");?></label></td>
 						<td><input type="text" class="input" name="newsletterGmA" id="newsletterGmA" style="width:150px;" /></td>
-						<td><em><?php echo _("Gmail address. Only needed for Gmail procedure.");?></em></td>
+						<td><em><?php echo T_("Gmail address. Only needed for Gmail procedure.");?></em></td>
 					</tr>
 					<tr>
-						<td><label><?php echo _("Gmail password");?></label></td>
+						<td><label><?php echo T_("Gmail password");?></label></td>
 						<td><input type="password" class="input" name="newsletterGmP" id="newsletterGmP" style="width:150px;" /></td>
-						<td><em><?php echo _("Only needed for Gmail procedure. (Registered encrypted)");?></em></td>
+						<td><em><?php echo T_("Only needed for Gmail procedure. (Registered encrypted)");?></em></td>
 					</tr>
 					<tr>
-						<td colspan=2 style="text-align:left;padding-left:30px;font-weight:700;"><?php echo _("Control key");?> :</td>
+						<td colspan=2 style="text-align:left;padding-left:30px;font-weight:700;"><?php echo T_("Control key");?> :</td>
 					</tr>
 					<tr>
-						<td><label><?php echo _("Passphrase");?></label></td>
+						<td><label><?php echo T_("Passphrase");?></label></td>
 						<td><input type="text" class="input" name="newsletterPhrase" id="newsletterPhrase" style="width:250px;" /></td>
-						<td><em><?php echo _("Sequence of words. Used to check the authenticity of a removal request.");?></em></td>
+						<td><em><?php echo T_("Sequence of words. Used to check the authenticity of a removal request.");?></em></td>
 					</tr>
 				</table>
-				<div class="bouton fr <?php if(!file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) echo 'danger'; ?>" onClick="f_saveConf_newsletter();" title="<?php echo _("Save settings");?>"><?php echo _("Save");?></div>
+				<div class="bouton fr <?php if(!file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) echo 'danger'; ?>" onClick="f_saveConf_newsletter();" title="<?php echo T_("Save settings");?>"><?php echo T_("Save");?></div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -106,8 +106,8 @@ if (isset($_POST['action']))
 		if(!isset($a['pass'])) $a['pass']='';
 		$a['su'] = $_POST['su'];
 		$out = json_encode($a);
-		if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out) && $b) echo _('newsletter saved');
-		else echo '!'._('Impossible backup');
+		if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out) && $b) echo T_('newsletter saved');
+		else echo '!'.T_('Impossible backup');
 		break;
 		// ********************************************************************************************
 		case 'saveConf':
@@ -124,8 +124,8 @@ if (isset($_POST['action']))
 		$a['gmp'] = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $sdata, strip_tags($_POST['gmp']), MCRYPT_MODE_ECB, $iv));
 		$a['pass'] = $_POST['pass'];
 		$out = json_encode($a);
-		if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo _('config saved');
-		else echo '!'._('Error');
+		if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo T_('config saved');
+		else echo '!'.T_('Error');
 		break;
 		// ********************************************************************************************
 		case 'load':
@@ -180,17 +180,17 @@ if (isset($_POST['action']))
 			if(!isset($a['list']) || array_search($l,$a['list'])===false) $a['list'][] = $l; // ajout du mail a la liste
 			else 
 				{
-				echo '!'._('already in the list');
+				echo '!'.T_('already in the list');
 				break;
 				}
 			$b = array();
 			foreach($a['list'] as $r) $b[] = $r;
 			$a['list'] = $b;
 			$out = json_encode($a);
-			if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo _('email added');
-			else echo '!'._('impossible add');
+			if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo T_('email added');
+			else echo '!'.T_('impossible add');
 			}
-		else echo '!'._('Error');
+		else echo '!'.T_('Error');
 		break;
 		// ********************************************************************************************
 		case 'del':
@@ -202,17 +202,17 @@ if (isset($_POST['action']))
 			if(($k=array_search($l,$a['list']))!==false) unset($a['list'][$k]);
 			else 
 				{
-				echo '!'._('Error');
+				echo '!'.T_('Error');
 				break;
 				}
 			$b = array();
 			foreach($a['list'] as $r) $b[] = $r;
 			$a['list'] = $b;
 			$out = json_encode($a);
-			if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo _('email deleted');
-			else echo '!'._('undeletable');
+			if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo T_('email deleted');
+			else echo '!'.T_('undeletable');
 			}
-		else echo '!'._('No data');
+		else echo '!'.T_('No data');
 		break;
 		// ********************************************************************************************
 		case 'send':
@@ -222,7 +222,7 @@ if (isset($_POST['action']))
 		$r = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, substr($key,0,30), strip_tags($_POST['dest']), MCRYPT_MODE_ECB, $iv));
 		$rn = "\r\n";
 		$ul = strip_tags($_POST['url'])."/uno/plugins/newsletter/newsletterSubscribe.php?c=".urlencode($r)."&m=".urlencode(strip_tags($_POST['dest']))."&a=del&b=".urlencode(strip_tags($_POST['url'].'/'.$_POST['nom'].'.html'));
-		$supp = "<a href='".$ul."'>"._("Unsubscribe")."</a>";
+		$supp = "<a href='".$ul."'>".T_("Unsubscribe")."</a>";
 		$bottom= str_replace('[[unsubscribe]]',$supp, $bottom); // template
 		$boundary = "-----=".md5(rand());
 		$msgT = strip_tags($_POST['cont']);
@@ -246,7 +246,7 @@ echo '<span style="color:green;">'.$_POST['dest'].' : OK</span> --- '; exit;
 		if($_POST['met']!='gm') // PHP mail()
 			{
 			if(mail($_POST['dest'], stripslashes($sujet), $msg,$header)) echo '<span style="color:green;">'.$_POST['dest'].' : OK</span> --- ';
-			else echo '<span style="color:red;">'.$_POST['dest'].' : '._("Failure").'</span> --- ';
+			else echo '<span style="color:red;">'.$_POST['dest'].' : '.T_("Failure").'</span> --- ';
 			}
 		else // Gmail
 			{
@@ -266,7 +266,7 @@ echo '<span style="color:green;">'.$_POST['dest'].' : OK</span> --- '; exit;
 			$smtp->Body = utf8_decode(stripslashes($msgH));
 			$smtp->AltBody = $msgT;
 			$smtp->AddAddress($_POST['dest']);
-			if(!$smtp->Send()) echo '<span style="color:red;">'.$_POST['dest'].' : '._("Failure").'</span> --- ';
+			if(!$smtp->Send()) echo '<span style="color:red;">'.$_POST['dest'].' : '.T_("Failure").'</span> --- ';
 			else echo '<span style="color:green;">'.$_POST['dest'].' : OK</span> --- ';
 			sleep(1.5);
 			}
