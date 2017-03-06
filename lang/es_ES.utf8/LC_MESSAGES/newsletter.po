@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CmsUno\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-24 16:05+0100\n"
-"PO-Revision-Date: 2015-08-24 16:09+0100\n"
-"Last-Translator: jacques Malgrange <contacter@boiteasite.fr>\n"
+"POT-Creation-Date: 2017-03-06 16:59+0100\n"
+"PO-Revision-Date: 2017-03-06 16:59+0100\n"
+"Last-Translator: malgrange <jacques.malgrange@gmail.com>\n"
 "Language-Team: Jacques Malgrange <contacter@boiteasite.fr>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Report-\tmsgstr-Bugs-To: \n"
 "Report-\t\tmsgstr-Bugs-To: \n"
-"X-Poedit-KeywordsList: _\n"
+"X-Poedit-KeywordsList: _;T_\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
@@ -28,7 +28,7 @@ msgid "Subscribe"
 msgstr "Suscribirse"
 
 #: ../../../newsletterMake.php:16
-#: ../../../newsletterSubscribe.php:94
+#: ../../../newsletterSubscribe.php:93
 msgid "You will receive an email to confirm"
 msgstr "Usted recibirá un email para confirmar"
 
@@ -65,8 +65,8 @@ msgid "This plugin allows you to send a newsletter to an email list."
 msgstr "Este plugin le permite enviar un newsletter a una lista de email."
 
 #: ../../../newsletter.php:26
-msgid "It works with the mail() function of your server or in SMTP with your GMAIL account."
-msgstr "Se trabaja con la función mail () de su servidor SMTP o con su cuenta de GMAIL."
+msgid "It works with the mail() function of your server or in SMTP with your GMAIL account or with another SMTP Provider account."
+msgstr "Se trabaja con la función mail () de su servidor SMTP o con su cuenta de GMAIL o con otra cuenta SMTP."
 
 #: ../../../newsletter.php:29
 msgid "The shortcode"
@@ -88,165 +88,226 @@ msgstr "Sujeto"
 msgid "Content"
 msgstr "Contenido"
 
-#: ../../../newsletter.php:41
+#: ../../../newsletter.php:42
 msgid "Saves the contents"
 msgstr "Guarda el contenido"
 
-#: ../../../newsletter.php:41
-#: ../../../newsletter.php:88
+#: ../../../newsletter.php:42
+#: ../../../newsletter.php:109
 msgid "Save"
 msgstr "Guardar"
 
-#: ../../../newsletter.php:42
 #: ../../../newsletter.php:43
+#: ../../../newsletter.php:44
 msgid "Sending"
 msgstr "Enviando"
 
-#: ../../../newsletter.php:42
 #: ../../../newsletter.php:43
+#: ../../../newsletter.php:44
 msgid "finished."
 msgstr "terminado."
 
-#: ../../../newsletter.php:42
-msgid "Send only to test"
-msgstr "Enviar sólo para probar"
+#: ../../../newsletter.php:43
+msgid "Send only to Admin"
+msgstr "Enviar sólo a Admin"
 
-#: ../../../newsletter.php:42
+#: ../../../newsletter.php:43
 msgid "Send to test"
 msgstr "Enviar a probar"
 
-#: ../../../newsletter.php:43
+#: ../../../newsletter.php:44
 msgid "Send the newsletter"
 msgstr "Enviar el newsletter"
 
-#: ../../../newsletter.php:43
+#: ../../../newsletter.php:44
 msgid "Send"
 msgstr "Enviar"
 
-#: ../../../newsletter.php:48
+#: ../../../newsletter.php:49
 msgid "New recipient"
 msgstr "Nuevo destinatario"
 
-#: ../../../newsletter.php:50
+#: ../../../newsletter.php:52
+msgid "Create group"
+msgstr "Crea un grupo"
+
+#: ../../../newsletter.php:54
 msgid "Add a new recipient"
 msgstr "Añadir un nuevo destinatario"
 
-#: ../../../newsletter.php:50
+#: ../../../newsletter.php:54
 msgid "Add"
 msgstr "Añadir"
 
-#: ../../../newsletter.php:57
+#: ../../../newsletter.php:59
+msgid "Email"
+msgstr "Email"
+
+#: ../../../newsletter.php:60
+msgid "Group"
+msgstr "Grupos"
+
+#: ../../../newsletter.php:61
+msgid "Action"
+msgstr "Acción"
+
+#: ../../../newsletter.php:72
+msgid "The User group contains the members of the Users plugin :"
+msgstr "El grupo User contiene los miembros del plugin Users :"
+
+#: ../../../newsletter.php:72
+msgid "members."
+msgstr "miembros"
+
+#: ../../../newsletter.php:80
 msgid "Sending method"
 msgstr "Método de envío"
 
-#: ../../../newsletter.php:60
-msgid "PHP"
-msgstr "PHP"
-
-#: ../../../newsletter.php:62
-msgid "Newsletter is sent by using the features of your server."
-msgstr "Newsletter se envía mediante el uso de las características de su servidor."
-
-#: ../../../newsletter.php:65
-msgid "Gmail"
-msgstr "Gmail"
-
-#: ../../../newsletter.php:67
-msgid "Newsletter is sent with your Gmail account."
-msgstr "Newsletter se envía a su cuenta de Gmail."
-
-#: ../../../newsletter.php:70
-msgid "Gmail account"
-msgstr "Cuenta de Gmail"
-
-#: ../../../newsletter.php:72
-msgid "Gmail address. Only needed for Gmail procedure."
-msgstr "Dirección de Gmail. Sólo es necesario para el procedimiento de Gmail."
-
-#: ../../../newsletter.php:75
-msgid "Gmail password"
-msgstr "Gmail contraseña"
-
-#: ../../../newsletter.php:77
-msgid "Only needed for Gmail procedure. (Registered encrypted)"
-msgstr "Sólo es necesario para el procedimiento de Gmail. (Registrado cifrada)"
-
-#: ../../../newsletter.php:80
-msgid "Control key"
-msgstr "Tecla de control"
-
 #: ../../../newsletter.php:83
-msgid "Passphrase"
-msgstr "Frase de contraseña"
+msgid "Method"
+msgstr "Método"
 
-#: ../../../newsletter.php:85
-msgid "Sequence of words. Used to check the authenticity of a removal request."
-msgstr "Secuencia de palabras. Se utiliza para comprobar la autenticidad de una solicitud de eliminación."
+#: ../../../newsletter.php:86
+msgid "Default (PHP)"
+msgstr "Por defecto (PHP)"
+
+#: ../../../newsletter.php:87
+msgid "Gmail (SMTP)"
+msgstr "Gmail (SMTP)"
 
 #: ../../../newsletter.php:88
+msgid "Other SMTP"
+msgstr "Otros SMTP"
+
+#: ../../../newsletter.php:91
+msgid "Newsletter is sent by using this method."
+msgstr "El newsletter se envía usando este método."
+
+#: ../../../newsletter.php:94
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: ../../../newsletter.php:96
+msgid "Email address for Gmail, username for other SMTP."
+msgstr "Email de Gmail, nombre de usuario para otro SMTP."
+
+#: ../../../newsletter.php:99
+msgid "Password"
+msgstr "Contraseña"
+
+#: ../../../newsletter.php:101
+msgid "Account password for this username. (Registered encrypted)"
+msgstr "Contraseña de la cuenta para este nombre de usuario. (Registrado cifrada)"
+
+#: ../../../newsletter.php:104
+msgid "Host"
+msgstr "Alojamiento"
+
+#: ../../../newsletter.php:106
+msgid "URL of your SMTP Provider"
+msgstr "URL de su proveedor SMTP"
+
+#: ../../../newsletter.php:109
 msgid "Save settings"
 msgstr "Guardar ajustes"
 
-#: ../../../newsletter.php:109
+#: ../../../newsletter.php:132
 msgid "newsletter saved"
 msgstr "newsletter salvado"
 
-#: ../../../newsletter.php:110
+#: ../../../newsletter.php:133
 msgid "Impossible backup"
 msgstr "Copia de seguridad Imposible"
 
-#: ../../../newsletter.php:127
+#: ../../../newsletter.php:151
 msgid "config saved"
 msgstr "configuración salvado"
 
-#: ../../../newsletter.php:128
-#: ../../../newsletter.php:193
-#: ../../../newsletter.php:205
-#: ../../../newsletterSubscribe.php:99
+#: ../../../newsletter.php:152
+#: ../../../newsletter.php:257
+#: ../../../newsletter.php:269
+#: ../../../newsletter.php:308
+#: ../../../newsletterSubscribe.php:94
 msgid "Error"
 msgstr "Error"
 
-#: ../../../newsletter.php:183
-msgid "already in the list"
-msgstr "ya en la lista"
+#: ../../../newsletter.php:186
+msgid "External"
+msgstr "Externo"
 
-#: ../../../newsletter.php:190
-#: ../../../newsletterSubscribe.php:24
+#: ../../../newsletter.php:186
+msgid "Manual"
+msgstr "Manual"
+
+#: ../../../newsletter.php:254
+#: ../../../newsletterSubscribe.php:23
 msgid "email added"
 msgstr "email añadió"
 
-#: ../../../newsletter.php:191
+#: ../../../newsletter.php:255
 msgid "impossible add"
 msgstr "no añadido"
 
-#: ../../../newsletter.php:212
-#: ../../../newsletterSubscribe.php:50
+#: ../../../newsletter.php:283
+#: ../../../newsletterSubscribe.php:56
 msgid "email deleted"
 msgstr "email eliminado"
 
-#: ../../../newsletter.php:213
+#: ../../../newsletter.php:284
 msgid "undeletable"
 msgstr "no eliminable"
 
-#: ../../../newsletter.php:215
+#: ../../../newsletter.php:286
 msgid "No data"
 msgstr "Sin datos"
 
-#: ../../../newsletter.php:225
-#: ../../../newsletterSubscribe.php:71
+#: ../../../newsletter.php:314
+#: ../../../newsletter.php:316
+#: ../../../newsletterSubscribe.php:76
+#: ../../../newsletterSubscribe.php:78
 msgid "Unsubscribe"
 msgstr "Cancelar la suscripción"
 
-#: ../../../newsletter.php:249
-#: ../../../newsletter.php:269
+#: ../../../newsletter.php:333
+#: ../../../newsletter.php:346
 msgid "Failure"
 msgstr "Fracaso"
 
-#: ../../../newsletterSubscribe.php:73
+#: ../../../newsletterSubscribe.php:77
 msgid "Confirm registration by clicking this link"
 msgstr "Confirmar el registro haciendo clic en este enlace"
 
-#: ../../../newsletterSubscribe.php:76
+#: ../../../newsletterSubscribe.php:80
 msgid "Subscribe Newsletter"
 msgstr "Suscríbete Newsletter"
 
+#~ msgid "Mandrill (SMTP)"
+#~ msgstr "Mandrill (SMTP)"
+
+#~ msgid "PHP"
+#~ msgstr "PHP"
+
+#~ msgid "Newsletter is sent with your Gmail account."
+#~ msgstr "Newsletter se envía a su cuenta de Gmail."
+
+#~ msgid "Gmail account"
+#~ msgstr "Cuenta de Gmail"
+
+#~ msgid "Gmail address. Only needed for Gmail procedure."
+#~ msgstr ""
+#~ "Dirección de Gmail. Sólo es necesario para el procedimiento de Gmail."
+
+#~ msgid "Control key"
+#~ msgstr "Tecla de control"
+
+#~ msgid "Passphrase"
+#~ msgstr "Frase de contraseña"
+
+#~ msgid ""
+#~ "Sequence of words. Used to check the authenticity of a removal request."
+#~ msgstr ""
+#~ "Secuencia de palabras. Se utiliza para comprobar la autenticidad de una "
+#~ "solicitud de eliminación."
+
+#~ msgid "already in the list"
+#~ msgstr "ya en la lista"
