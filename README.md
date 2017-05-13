@@ -34,6 +34,7 @@ Email list from the Users plugin available.
 
 ### Versions ###
 
+* 1.2.2 - 13/05/2017 : PHPMailer 5.2.23
 * 1.2.1 - 15/03/2017 : Fix issue when unknow lang
 * 1.2 - 06/03/2017 :
 	* PHPMailer 5.2.22
