@@ -1,3 +1,4 @@
+#newsletterSu{width:400px;}
 #newsletterML table{margin:10px;}
 #newsletterML table td{vertical-align:middle;padding:2px;}
 #newsletterML table td:nth-child(1){padding-right:20px;}
@@ -7,3 +8,6 @@
 .newsletterGroup{padding:10px 0;}
 .newsletterGroup span{border:1px solid #ccc;padding:2px 3px;margin:2px;background-color:#ddd;border-radius:2px;}
 .newsletterGroup span input{vertical-align:middle;}
+@media screen and (max-width:780px){
+	#newsletterSu{width:97%;}
+}

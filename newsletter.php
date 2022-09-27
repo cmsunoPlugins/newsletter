@@ -32,7 +32,7 @@ if (isset($_POST['action']))
 				<div class="blocForm">
 					<div class="input" id="newsletterP">
 						<p><?php echo T_("Subject");?></p>
-						<input name="newsletterSu" id="newsletterSu" size="50" type="text" value="" />
+						<input name="newsletterSu" id="newsletterSu" type="text" value="" />
 						<p><?php echo T_("Content");?></p>
 						<textarea name="newsletterCont" id="newsletterCont"></textarea>
 					</div>

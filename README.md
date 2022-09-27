@@ -34,6 +34,7 @@ Email list from the Users plugin available.
 
 ### Versions ###
 
+* 1.3.1 - 27/09/2022 : Responsive display
 * 1.3 - 26/01/2022 : PHPMailer 6.5.3
 * 1.2.3 - 05/10/2017 : PHPMailer 5.2.25
 * 1.2.2 - 13/05/2017 : PHPMailer 5.2.23
