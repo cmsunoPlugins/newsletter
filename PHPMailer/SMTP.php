@@ -19,7 +19,9 @@
  * FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-namespace PHPMailer\PHPMailer;
+// ********************************** REMOVED - CMSUNO ********************************
+//namespace PHPMailer\PHPMailer;
+// ************************************************************************************
 
 /**
  * PHPMailer RFC821 SMTP email transport class.
@@ -35,7 +37,7 @@ class SMTP
      *
      * @var string
      */
-    const VERSION = '6.6.4';
+    const VERSION = '6.6.5';
 
     /**
      * SMTP line break constant.
@@ -682,7 +684,6 @@ class SMTP
      */
     public function close()
     {
-        $this->setError('');
         $this->server_caps = null;
         $this->helo_rply = null;
         if (is_resource($this->smtp_conn)) {

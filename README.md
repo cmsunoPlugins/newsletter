@@ -34,6 +34,10 @@ Email list from the Users plugin available.
 
 ### Versions ###
 
+* 1.4 - 28/09/2022 :
+	* JQuery free
+	* PHPMailer 6.6.5
+	* Ability to edit the email to change groups
 * 1.3.2 - 28/09/2022 : PHPMailer 6.6.4
 * 1.3.1 - 27/09/2022 : Responsive display
 * 1.3 - 26/01/2022 : PHPMailer 6.5.3

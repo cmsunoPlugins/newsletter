@@ -1,16 +1,14 @@
 <?php
 session_start(); 
-if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH'])!='xmlhttprequest') {sleep(2);exit;} // ajax request
 if(!isset($_POST['unox']) || $_POST['unox']!=$_SESSION['unox']) {sleep(2);exit;} // appel depuis uno.php
 ?>
 <?php
 include('../../config.php');
 include('lang/lang.php');
+$busy = (isset($_POST['ubusy'])?preg_replace("/[^A-Za-z0-9-_]/",'',$_POST['ubusy']):'index');
 // ********************* actions *************************************************************************
-if (isset($_POST['action']))
-	{
-	switch ($_POST['action'])
-		{
+if(isset($_POST['action'])) {
+	switch ($_POST['action']) {
 		// ********************************************************************************************
 		case 'plugin': ?>
 		<link rel="stylesheet" type="text/css" media="screen" href="uno/plugins/newsletter/newsletter.css" />
@@ -29,6 +27,7 @@ if (isset($_POST['action']))
 					<?php echo T_("The shortcode");?>&nbsp;<code>[[newsletter]]</code>&nbsp;<?php echo T_("add a field to enter his email address and receive the newsletter.")." ";?>
 					<?php echo T_("The newsletter contains in footer an automatic unsubscribe link.");?>
 				</p>
+				<p><?php echo T_("This plugin adds the excellent PHPMailer module which will then be used by other plugins (contact, users...).");?></p>
 				<div class="blocForm">
 					<div class="input" id="newsletterP">
 						<p><?php echo T_("Subject");?></p>
@@ -47,31 +46,35 @@ if (isset($_POST['action']))
 			<div id="newsletterList" style="display:none;">
 				<div>
 					<p><?php echo T_("New recipient");?></p>
-					<input name="newsletterAdd" id="newsletterAdd" size="50" type="text" />
-					<br />
-					<input name="newsletterLGadd" id="newsletterLGadd" size="10" type="text" placeholder="<?php echo T_("Create group");?>" />
-					<div id="newsletterLgroup" class="newsletterGroup fl" style="width:320px;"></div>
-					<div class="bouton" onClick="f_add_newsletter();" title="<?php echo T_("Add a new recipient");?>"><?php echo T_("Add");?></div>
+					<table>
+						<tr><td>
+							<input name="newsletterAdd" id="newsletterAdd" size="50" type="text" />
+							<br />
+							<input name="newsletterLGadd" id="newsletterLGadd" size="10" type="text" placeholder="<?php echo T_("Create group");?>" />
+							<div id="newsletterLgroup" class="newsletterGroup fl" style="width:320px;"></div>
+						</td><td><div style="height:4px;">&nbsp;</div>
+							<div class="bouton" style="margin-left:25px;" onClick="f_add_newsletter();" title="<?php echo T_("Add a new recipient");?>"><?php echo T_("Add");?></div>
+						</td></tr>
+					</table>
 					<div id="newsletterML">
 						<table>
 							<thead>
 								<tr>
 									<th><?php echo T_("Email");?></th>
 									<th><?php echo T_("Group");?></th>
-									<th><?php echo T_("Action");?></th>
+									<th colspan="2"><?php echo T_("Action");?></th>
 								</tr>
 							</thead>
 							<tbody id="newsletterTlist"></tbody>
 						</table>
 					</div>
 					<?php
-					if(file_exists('../../data/_sdata-'.$sdata.'/users.json') && file_exists('../users/users.php'))
-						{
+					if(file_exists('../../data/_sdata-'.$sdata.'/users.json') && file_exists('../users/users.php')) {
 						$q = file_get_contents('../../data/_sdata-'.$sdata.'/users.json');
 						$a = json_decode($q,true);
 						echo '<p>'.T_("The User group contains the members of the Users plugin :").'&nbsp;'.count($a['user']).'&nbsp;'.T_("members.").'</p>';
-						}
-					?>
+					} ?>
+					
 				</div>
 			</div>
 			<div id="newsletterConfig" style="display:none;">
@@ -115,18 +118,17 @@ if (isset($_POST['action']))
 		case 'save':
 		$b = 0;
 		if(file_put_contents('../../data/newsletter.txt', $_POST['cont'])) $b=1;
-		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json'))
-			{
+		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) {
 			$q = file_get_contents('../../data/_sdata-'.$sdata.'/newsletter.json');
 			$a = json_decode($q,true);
-			}
+		}
 		else $a = array();
 		if(!isset($a['met'])) $a['met'] = '';
 		if(!isset($a['gma'])) $a['gma'] = '';
 		if(!isset($a['gmp'])) $a['gmp'] = '';
 		if(!isset($a['gmh'])) $a['gmh'] = '';
 		if(empty($a['iv'])) $a['iv'] = base64_encode(openssl_random_pseudo_bytes(16));
-		if(empty($a['group']) || !in_array('base',$a['group'])) $a['group'] = array('ext','man');
+		if(empty($a['group'])) $a['group'] = array('ext','man');
 		$a['su'] = strip_tags($_POST['su']);
 		$out = json_encode($a);
 		if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out) && $b) echo T_('newsletter saved');
@@ -135,17 +137,16 @@ if (isset($_POST['action']))
 		// ********************************************************************************************
 		case 'saveConf':
 		$b = 0;
-		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json'))
-			{
+		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) {
 			$q = file_get_contents('../../data/_sdata-'.$sdata.'/newsletter.json');
 			$a = json_decode($q,true);
-			}
+		}
 		else $a = array();
 		$a['met'] = $_POST['met'];
 		$a['gma'] = $_POST['gma'];
 		$a['gmh'] = $_POST['gmh'];
 		if(empty($a['iv'])) $a['iv'] = base64_encode(openssl_random_pseudo_bytes(16));
-		if(empty($a['group']) || !in_array('base',$a['group'])) $a['group'] = array('ext','man');
+		if(empty($a['group'])) $a['group'] = array('ext','man');
 		if($a['gma']) $a['gmp'] = base64_encode(openssl_encrypt(strip_tags($_POST['gmp']), 'AES-256-CBC', substr($Ukey,0,32), OPENSSL_RAW_DATA, base64_decode($a['iv'])));
 		$out = json_encode($a);
 		if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo T_('config saved');
@@ -153,148 +154,131 @@ if (isset($_POST['action']))
 		break;
 		// ********************************************************************************************
 		case 'load':
-		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json'))
-			{
-			$q = file_get_contents('../../data/busy.json'); $a = json_decode($q,true); $Ubusy = $a['nom'];
+		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) {
 			$q = file_get_contents('../../data/_sdata-'.$sdata.'/newsletter.json'); // liste des emails + options + sujet
 			$a = json_decode($q,true);
-			if(isset($a['list'][0]) && is_string($a['list'][0]))
-				{ // *** PATCH - ADD GROUP IF NOT EXISTS
+			if(isset($a['list'][0]) && is_string($a['list'][0])) { // *** PATCH - ADD GROUP IF NOT EXISTS
 				$c = array();
-				foreach($a['list'] as $k=>$v)
-					{
+				foreach($a['list'] as $k=>$v) {
 					$c[$v] = array('man','ext');
-					}
+				}
 				$a['list'] = $c;
 				file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', json_encode($a));
-				} // ***
-			if(file_exists('../../data/'.$Ubusy.'/site.json'))
-				{
-				$q = file_get_contents('../../data/'.$Ubusy.'/site.json'); $b = json_decode($q,true); $a['tit'] = $b['tit']; $a['url'] = $b['url']; $a['nom'] = $b['nom'];
-				}
+			} // ***
+			if(file_exists('../../data/'.$busy.'/site.json')) {
+				$q = file_get_contents('../../data/'.$busy.'/site.json'); $b = json_decode($q,true); $a['tit'] = $b['tit']; $a['url'] = $b['url']; $a['nom'] = $b['nom'];
+			}
 			else exit;
-			if(file_exists('../../data/_sdata-'.$sdata.'/ssite.json'))
-				{
+			if(file_exists('../../data/_sdata-'.$sdata.'/ssite.json')) {
 				$q = file_get_contents('../../data/_sdata-'.$sdata.'/ssite.json'); $b = json_decode($q,true); $a['mel'] = $b['mel'];
-				}
+			}
 			else exit;
-			if(isset($a['gmp']) && $a['gmp'])
-				{
+			if(isset($a['gmp']) && $a['gmp']) {
 				$a['gmp'] = openssl_decrypt(base64_decode($a['gmp']), 'AES-256-CBC', substr($Ukey,0,32), OPENSSL_RAW_DATA, base64_decode($a['iv']));
 				$a['gmp'] = rtrim($a['gmp'], "\0");
-				}
+			}
 			$c = array('ext'=>T_("External"), 'man'=>T_("Manual"));
-			if(isset($a['group']))
-				{
-				foreach($a['group'] as $k=>$v)
-					{
+			if(isset($a['group'])) {
+				foreach($a['group'] as $k=>$v) {
 					if(isset($c[$v])) $a['group'][$k] = '|'.$c[$v];
-					}
+				}
 				if(file_exists('../../data/_sdata-'.$sdata.'/users.json') && file_exists('../users/users.php')) $a['group'][] = '|User';
-				}
-			if(isset($a['list']))
-				{
-				foreach($a['list'] as $k=>$v)
-					{
+			}
+			if(isset($a['list'])) {
+				foreach($a['list'] as $k=>$v) {
 					foreach($v as $k1=>$v1) if(isset($c[$v1])) $a['list'][$k][$k1] = $c[$v1];
-					}
 				}
-			if(!empty($_POST['send']) && file_exists('../../data/_sdata-'.$sdata.'/users.json') && file_exists('../users/users.php'))
-				{
+			}
+			if(!empty($_POST['send']) && file_exists('../../data/_sdata-'.$sdata.'/users.json') && file_exists('../users/users.php')) {
 				$q = file_get_contents('../../data/_sdata-'.$sdata.'/users.json');
 				$c = json_decode($q,true); 
-				if(isset($c['user']))
-					{
-					foreach($c['user'] as $k=>$v)
-						{
-						if(!empty($v['e']) && (!isset($a['unsub']) || !in_array($v['e'],$a['unsub'])))
-							{
+				if(isset($c['user'])) {
+					foreach($c['user'] as $k=>$v) {
+						if(!empty($v['e']) && (!isset($a['unsub']) || !in_array($v['e'],$a['unsub']))) {
 							if(!isset($a['list'][$v['e']])) $a['list'][$v['e']] = array('User');
 							else $a['list'][$v['e']][] = 'User';
-							}
 						}
 					}
 				}
+			}
 			$out = json_encode($a);
 			echo $out;
-			}
+		}
 		else echo '';
 		exit;
 		break;
 		// ********************************************************************************************
 		case 'loadContent':
-		if(file_exists('../../data/newsletter.txt'))
-			{
+		if(file_exists('../../data/newsletter.txt')) {
 			$q = file_get_contents('../../data/newsletter.txt'); // contenu
 			echo stripslashes($q);
-			}
+		}
 		else echo '';
 		exit;
 		break;
 		// ********************************************************************************************
 		case 'add':
-		$l = strip_tags($_POST['add']);
-		$ng = strip_tags($_POST['ng']);
-		$group = ((isset($_POST['group']) && is_array($_POST['group']))?$_POST['group']:array());
-		if($l)
-			{
-			if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json'))
-				{
+		$mel = strip_tags($_POST['add']);
+		$ngr = strip_tags($_POST['ng']);
+		$group = ((isset($_POST['group'])&&$j=json_decode(strip_tags($_POST['group'])))?$j:array());
+		if($mel) {
+			if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) {
 				$q = file_get_contents('../../data/_sdata-'.$sdata.'/newsletter.json');
 				$a = json_decode($q,true);
-				}
+			}
 			if(!in_array('man',$group)) $group[] = 'man';
-			if($ng && !in_array($ng,$group)) $group[] = $ng;
-			$a['list'][$l] = $group; // ajout du mail a la liste
-			foreach($group as $r)
-				{
+			if($ngr && !in_array($ngr,$group)) $group[] = $ngr;
+			$a['list'][$mel] = $group; // Add/Update mail to list
+			foreach($group as $r) {
 				if($r && !in_array($r,$a['group']) && $r!='User') $a['group'][] = $r;
-				}
+			}
+			// Check group list
+			$b = array();
+			foreach($a['list'] as $gr) { // "list":{"lol@gmail.com":["man","blue"],
+				foreach($gr as $v) if(!in_array($v,$b)) $b[] = $v;
+			}
+			foreach($a['group'] as $k=>$v) { // "group":["ext","man","blue,...]
+				if($v!='user' && $v!='ext' && $v!='man' && !in_array($v,$b)) unset($a['group'][$k]);
+			}
 			// CLEAN UNSUB
-			if(file_exists('../../data/_sdata-'.$sdata.'/users.json') && file_exists('../users/users.php') && isset($a['unsub']))
-				{
+			if(file_exists('../../data/_sdata-'.$sdata.'/users.json') && file_exists('../users/users.php') && isset($a['unsub'])) {
 				$q = file_get_contents('../../data/_sdata-'.$sdata.'/users.json');
 				$c = json_decode($q,true);
 				$b = ',';
 				foreach($c['user'] as $k=>$v) $b .= $v['e'].',';
-				foreach($a['unsub'] as $k=>$v)
-					{
+				foreach($a['unsub'] as $k=>$v) {
 					if(strpos($b, ','.$v.',')===false) unset($a['unsub'][$k]);
-					}
 				}
+			}
 			$out = json_encode($a);
 			if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo T_('email added');
 			else echo '!'.T_('impossible add');
-			}
+		}
 		else echo '!'.T_('Error');
 		break;
 		// ********************************************************************************************
 		case 'del':
 		$l = strip_tags($_POST['del']);
-		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json') && $l)
-			{
+		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json') && $l) {
 			$q = file_get_contents('../../data/_sdata-'.$sdata.'/newsletter.json');
 			$a = json_decode($q,true);
 			if(isset($a['list'][$l])) unset($a['list'][$l]);
-			else 
-				{
+			else {
 				echo '!'.T_('Error');
 				break;
-				}
-			// Check items group exists
+			}
+			// Check group exists
 			$b = array();
-			foreach($a['list'] as $k=>$v)
-				{
+			foreach($a['list'] as $k=>$v) {
 				foreach($v as $r) if(!in_array($r,$b)) $b[] = $r;
-				}
-			foreach($a['group'] as $k=>$v)
-				{
+			}
+			foreach($a['group'] as $k=>$v) {
 				if($v!='user' && $v!='ext' && $v!='man' && !in_array($v,$b)) unset($a['group'][$k]);
-				}
+			}
 			$out = json_encode($a);
 			if(file_put_contents('../../data/_sdata-'.$sdata.'/newsletter.json', $out)) echo T_('email deleted');
 			else echo '!'.T_('undeletable');
-			}
+		}
 		else echo '!'.T_('No data');
 		break;
 		// ********************************************************************************************
@@ -310,16 +294,14 @@ if (isset($_POST['action']))
 		$gma = strip_tags($_POST['gma']);
 		$gmp = strip_tags($_POST['gmp']);
 		$gmh = strip_tags($_POST['gmh']);
-		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json'))
-			{
+		if(file_exists('../../data/_sdata-'.$sdata.'/newsletter.json')) {
 			$q = file_get_contents('../../data/_sdata-'.$sdata.'/newsletter.json');
 			$a = json_decode($q,true);
-			}
-		else
-			{
+		}
+		else {
 			echo '!'.T_('Error');
 			break;
-			}
+		}
 		include '../../template/mailTemplate.php';
 		$r = base64_encode(openssl_encrypt(strip_tags($_POST['dest']), 'AES-256-CBC', substr($Ukey,0,32), OPENSSL_RAW_DATA, base64_decode($a['iv'])));
 		$ul = $url."/uno/plugins/newsletter/newsletterSubscribe.php?c=".urlencode($r)."&m=".urlencode($dest)."&a=del&b=".urlencode($url.'/'.$nom.'.html');
@@ -339,13 +321,11 @@ if (isset($_POST['action']))
 		$phm->Subject = $sujet;
 		$phm->Body = $msgH;		
 		$phm->AltBody = $msgT;
-		if(empty($met)) // PHP mail()
-			{
+		if(empty($met)) { // PHP mail()
 			if($phm->Send()) echo '<div style="color:green;">'.$dest.' : OK</div>';
 			else echo '<div style="color:red;">'.$dest.' : '.T_("Failure").' : '.$phm->ErrorInfo.'</div>';
-			}
-		else // SMTP
-			{
+		}
+		else { // SMTP
 			$phm->IsSMTP();
 			$phm->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
 			$phm->SMTPAuth = true;  // authentication enabled
@@ -357,11 +337,11 @@ if (isset($_POST['action']))
 			if($phm->Send()) echo '<div style="color:green;">'.$dest.' : OK</div> --- ';
 			else echo '<div style="color:red;">'.$dest.' : '.T_("Failure").' : '.$phm->ErrorInfo.'</div> --- ';
 			sleep(1.1);
-			}
+		}
 		break;
 		// ********************************************************************************************
-		}
+	}
 	clearstatcache();
 	exit;
-	}
+}
 ?>

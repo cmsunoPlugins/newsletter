@@ -3,8 +3,11 @@
 #newsletterML table td{vertical-align:middle;padding:2px;}
 #newsletterML table td:nth-child(1){padding-right:20px;}
 #newsletterML table td:nth-child(2){padding-right:20px;color:#666;}
-#newsletterML table td:nth-child(3){font-weight:700;font-size:120%;color:red;cursor:pointer;text-align:center;}
+#newsletterML table td:nth-child(3){font-weight:700;font-size:120%;color:red;cursor:pointer;text-align:center;width:20px;}
+#newsletterML table td:nth-child(4){cursor:pointer;width:16px;height:16px;margin-left:10px;}
 #newsletterResult{border-left:2px solid red;padding:5px;width:70%;display:none;}
+#newsletterAdd{margin-bottom:10px;}
+.vcent .bouton{margin-top:16px;}
 .newsletterGroup{padding:10px 0;}
 .newsletterGroup span{border:1px solid #ccc;padding:2px 3px;margin:2px;background-color:#ddd;border-radius:2px;}
 .newsletterGroup span input{vertical-align:middle;}
