@@ -6,6 +6,7 @@ function f_load_newsletter(){
 	let x=new FormData();
 	x.set('action','load');
 	x.set('unox',Unox);
+	x.set('ubusy',Ubusy);
 	fetch('uno/plugins/newsletter/newsletter.php',{method:'post',body:x})
 	.then(r=>r.json())
 	.then(function(r){
