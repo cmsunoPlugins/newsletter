@@ -34,6 +34,7 @@ Email list from the Users plugin available.
 
 ### Versions ###
 
+* 1.4.3 - 09/12/2024 : PHPMailer 6.9.3
 * 1.4.2 - 26/11/2023 : PHPMailer 6.9.1
 * 1.4.1 - 15/04/2023 : Add post ubusy
 * 1.4 - 28/09/2022 :
